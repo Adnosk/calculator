@@ -5,4 +5,64 @@
 body {
     margin: 0;
     padding: 0;
+    background: cadetblue;
+}
+
+#container {
+    max-width: 400px;
+    margin: auto;
+    height: 100vh;
+    color: white;
+    font-weight: 700;
+    display: grid;
+    align-content: center;
+}
+
+#calculator {
+    background-color: black;
+
+}
+
+#display {
+    text-align: right;
+    border-left: 7px solid white;
+    border-right: 7px solid white;
+    border-top: 7px solid white;
+    padding: 10px 20px 10px 0px;
+    font-size: 40px;
+}
+
+#buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    justify-items: center;
+    border: 7px solid white;
+    padding: 20px 0;
+    font-size: 28px;
+}
+
+#calculator,
+#buttons div {
+    padding: 10px;
+    margin: 10px;
+}
+
+#buttons div {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.nums {
+    background: #46423b;
+    border-radius: 50%;
+    height: 60px;
+    width: 60px;
+}
+
+.operator {
+    background: #ff9800;
+    border-radius: 50%;
+    height: 60px;
+    width: 60px;
 }
