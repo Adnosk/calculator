@@ -59,15 +59,15 @@ clear.addEventListener('click', clear => {
 });
 
 function selectButton(e) {
-        deselectButton;
-        e.target.classList.add('active');
-    }
+    deselectButton;
+    e.target.classList.add('active');
+};
 
 function deselectButton(e) {
     operators.forEach(op => {
         op.classList.remove('active');
     });
-}
+};
 
 const operators = document.querySelectorAll('.operator');
 
