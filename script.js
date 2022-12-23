@@ -70,22 +70,65 @@ function selectOperator(e) {
     hasDecimalPoint = false;
     e.target.classList.add('active');
     if (e.target.innerHTML === '+') {
-        changeToSecondValue();
-        selectedOperator = add;
+        if (firstValue) {
+            secondValue = Number(displayValue);
+            displayValue = operate(selectedOperator, firstValue, secondValue);
+            updateDisplay();
+            firstValue = Number(displayValue);
+            displayValue = 0;
+            selectedOperator = add;
+        } else {
+            selectedOperator = add;
+            changeToSecondValue();
+        };
     } else if (e.target.innerHTML === '−') {
-        changeToSecondValue();
-        selectedOperator = subtract;
+
+
+        
+
+        if (firstValue) {
+            secondValue = Number(displayValue);
+            displayValue = operate(selectedOperator, firstValue, secondValue);
+            updateDisplay();
+            firstValue = Number(displayValue);
+            displayValue = false;
+            selectedOperator = subtract;
+        } else {
+            selectedOperator = subtract;
+            changeToSecondValue();
+        };
+
+
     } else if (e.target.innerHTML === 'x') {
-        changeToSecondValue();
-        selectedOperator = multiply;
+        if (firstValue) {
+            secondValue = Number(displayValue);
+            displayValue = operate(selectedOperator, firstValue, secondValue);
+            updateDisplay();
+            firstValue = Number(displayValue);
+            displayValue = false;
+            selectedOperator = multiply;
+        } else {
+            selectedOperator = multiply;
+            changeToSecondValue();
+        };
     } else if (e.target.innerHTML === '/') {
-        changeToSecondValue();
-        selectedOperator = divide;
+        if (firstValue) {
+            secondValue = Number(displayValue);
+            displayValue = operate(selectedOperator, firstValue, secondValue);
+            updateDisplay();
+            firstValue = Number(displayValue);
+            displayValue = false;
+            selectedOperator = divide;
+        } else {
+            selectedOperator = divide;
+            changeToSecondValue();
+        };
     } else if (e.target.innerHTML === '=' && firstValue) {
         secondValue = Number(displayValue);
-        displayValue = operate(selectedOperator, firstValue, secondValue);
+            displayValue = operate(selectedOperator, firstValue, secondValue);
         updateDisplay();
-        displayValue = 0;
+        firstValue = Number(displayValue);
+        displayValue = false;
         deselectOperator();
     };
 };
@@ -106,4 +149,3 @@ const operators = document.querySelectorAll('.operator');
 operators.forEach(operator => {
     operator.addEventListener('click', selectOperator);
 });
-
