@@ -53,15 +53,24 @@ buttons.forEach(button => {
 const clear = document.querySelector('#clear');
 clear.addEventListener('click', clear => {
     displayValue = 0;
+    hasDecimalPoint = false;
     updateDisplay();
+    deselectButton();
 });
 
-const operators = document.querySelectorAll('.operator');
-operators.forEach(operator => {
-    operator.addEventListener('click', (e) => {
-        operators.forEach(op => {
-            op.classList.remove('active');
-        });
+function selectButton(e) {
+        deselectButton;
         e.target.classList.add('active');
+    }
+
+function deselectButton(e) {
+    operators.forEach(op => {
+        op.classList.remove('active');
     });
+}
+
+const operators = document.querySelectorAll('.operator');
+
+operators.forEach(operator => {
+    operator.addEventListener('click', selectButton);
 });
