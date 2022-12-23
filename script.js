@@ -22,6 +22,7 @@ let displayValue = 0;
 let firstValue = 0;
 let secondValue = false;
 let selectedOperator = '';
+let hasDecimalPoint = false;
 const display = document.querySelector('#number');
 
 // display the stored value on the display
@@ -29,7 +30,7 @@ function updateDisplay() {
     display.innerHTML = displayValue;
 };
 
-let hasDecimalPoint = false;
+
 
 // pressing buttons and displaying the numbers on the display, checks for decimal
 const buttons = document.querySelectorAll('.nums');
@@ -64,29 +65,26 @@ clear.addEventListener('click', clear => {
 
 function selectOperator(e) {
     deselectOperator(e);
+    hasDecimalPoint = false;
     e.target.classList.add('active');
     if (e.target.innerHTML === '+') {
-        // addition
         changeToSecondValue();
         selectedOperator = add;
-
     } else if (e.target.innerHTML === '−') {
-        // subtract
         changeToSecondValue();
         selectedOperator = subtract;
     } else if (e.target.innerHTML === 'x') {
-        // multiply
         changeToSecondValue();
         selectedOperator = multiply;
     } else if (e.target.innerHTML === '/') {
-        // division
         changeToSecondValue();
         selectedOperator = divide;
     } else if (e.target.innerHTML === '=') {
-        // equals to
         secondValue = Number(displayValue);
         displayValue = operate(selectedOperator, firstValue, secondValue);
         updateDisplay();
+        displayValue = 0;
+        deselectOperator();
     };
 };
 
