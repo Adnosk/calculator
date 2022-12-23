@@ -60,6 +60,13 @@ body {
     width: 60px;
 }
 
+#clear {
+    background: #57af2e;
+    border-radius: 50%;
+    height: 60px;
+    width: 60px;
+}
+
 .operator {
     background: #ff9800;
     border-radius: 50%;
