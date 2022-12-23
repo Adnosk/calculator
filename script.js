@@ -64,6 +64,17 @@ clear.addEventListener('click', clear => {
 function selectOperator(e) {
     deselectOperator(e);
     e.target.classList.add('active');
+    if(e.target.innerHTML === '+') {
+        // addition
+    } else if(e.target.innerHTML === '-') {
+        // subtract
+    } else if(e.target.innerHTML === 'x') {
+        // multiply
+    } else if(e.target.innerHTML === '/') {
+        // division
+    } else if(e.target.innerHTML === '=') {
+        // equals to
+    }
 };
 
 function deselectOperator() {
