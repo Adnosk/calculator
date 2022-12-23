@@ -19,7 +19,8 @@ function operate(operator, a, b) {
 }
 
 let displayValue = 0;
-let secondValue = 0;
+let firstValue = 0;
+let secondValue = false;
 const display = document.querySelector('#number');
 
 // display the stored value on the display
@@ -57,15 +58,15 @@ clear.addEventListener('click', clear => {
     displayValue = 0;
     hasDecimalPoint = false;
     updateDisplay();
-    deselectButton();
+    deselectOperator();
 });
 
-function selectButton(e) {
-    deselectButton(e);
+function selectOperator(e) {
+    deselectOperator(e);
     e.target.classList.add('active');
 };
 
-function deselectButton() {
+function deselectOperator() {
     operators.forEach(op => {
         op.classList.remove('active');
     });
@@ -74,5 +75,6 @@ function deselectButton() {
 const operators = document.querySelectorAll('.operator');
 
 operators.forEach(operator => {
-    operator.addEventListener('click', selectButton);
+    operator.addEventListener('click', selectOperator);
 });
+
