@@ -21,6 +21,7 @@ function operate(operator, a, b) {
 let displayValue = 0;
 let firstValue = 0;
 let secondValue = false;
+let selectedOperator = '';
 const display = document.querySelector('#number');
 
 // display the stored value on the display
@@ -67,24 +68,30 @@ function selectOperator(e) {
     if (e.target.innerHTML === '+') {
         // addition
         changeToSecondValue();
+        selectedOperator = add;
 
-    } else if (e.target.innerHTML === '-') {
+    } else if (e.target.innerHTML === '−') {
         // subtract
         changeToSecondValue();
+        selectedOperator = subtract;
     } else if (e.target.innerHTML === 'x') {
         // multiply
         changeToSecondValue();
+        selectedOperator = multiply;
     } else if (e.target.innerHTML === '/') {
         // division
         changeToSecondValue();
+        selectedOperator = divide;
     } else if (e.target.innerHTML === '=') {
         // equals to
-        secondValue = displayValue;
-    }
+        secondValue = Number(displayValue);
+        displayValue = operate(selectedOperator, firstValue, secondValue);
+        updateDisplay();
+    };
 };
 
 function changeToSecondValue() {
-    firstValue = displayValue;
+    firstValue = Number(displayValue);
     displayValue = 0;
 }
 
