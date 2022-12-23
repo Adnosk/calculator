@@ -26,14 +26,24 @@ function updateDisplay() {
     display.innerHTML = displayValue;
 };
 
-// pressing buttons and displaying the numbers on the display
+
+let hasDecimalPoint = false;
+
+// pressing buttons and displaying the numbers on the display, checks for decimal
 const buttons = document.querySelectorAll('.nums');
 buttons.forEach(button => {
     button.addEventListener('click', () => {
-        if (displayValue == 0 && button.textContent !== '.') {
-            displayValue = button.textContent;
+        if (button.textContent === '.') {
+            if (!hasDecimalPoint) {
+                displayValue = `${displayValue}${button.textContent}`;
+                hasDecimalPoint = true;
+            }
         } else {
-            displayValue = `${displayValue}${button.textContent}`;
+            if (displayValue == 0) {
+                displayValue = button.textContent;
+            } else {
+                displayValue = `${displayValue}${button.textContent}`;
+            }
         }
         updateDisplay();
     });
@@ -44,4 +54,14 @@ const clear = document.querySelector('#clear');
 clear.addEventListener('click', clear => {
     displayValue = 0;
     updateDisplay();
+});
+
+const operators = document.querySelectorAll('.operator');
+operators.forEach(operator => {
+    operator.addEventListener('click', (e) => {
+        operators.forEach(op => {
+            op.classList.remove('active');
+        });
+        e.target.classList.add('active');
+    });
 });
