@@ -30,12 +30,12 @@ body {
     border-top: 7px solid white;
     padding: 10px 20px 10px 0px;
     font-size: 40px;
+    background: #57af2e;
 }
 
 #buttons {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    justify-items: center;
     border: 7px solid white;
     padding: 20px 0;
     font-size: 28px;
@@ -62,9 +62,8 @@ body {
 
 #clear {
     background: #57af2e;
-    border-radius: 50%;
-    height: 60px;
-    width: 60px;
+    border-radius: 15%;
+    grid-column: 1 / 4;
 }
 
 .operator {
@@ -76,4 +75,16 @@ body {
 
 .active {
     background: #f94821;
+}
+
+#num0 {
+    grid-column: 1 / 3;
+    height: auto;
+    width: auto;
+    border-radius: 20%;
+}
+
+#equals {
+    grid-column: 4 / 4;
+  grid-row: 5;
 }
