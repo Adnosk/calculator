@@ -23,6 +23,7 @@ let firstValue = false;
 let secondValue = false;
 let selectedOperator = false;
 let hasDecimalPoint = false;
+let operatorClicked = false;
 const display = document.querySelector('#number');
 
 // display the stored value on the display
@@ -38,6 +39,7 @@ buttons.forEach(pressingNums);
 
 function pressingNums(button) {
     button.addEventListener('click', () => {
+        operatorClicked = false;
         if (button.textContent === '.') {
             if (!hasDecimalPoint) {
                 displayValue = `${displayValue}${button.textContent}`;
@@ -66,6 +68,11 @@ clear.addEventListener('click', clear => {
 });
 
 function selectOperator(e) {
+    if (operatorClicked && e.target.innerHTML !== '=') {
+        return;
+    }
+
+    operatorClicked = true;
     deselectOperator(e);
     hasDecimalPoint = false;
     e.target.classList.add('active');
@@ -80,6 +87,7 @@ function selectOperator(e) {
     } else if (e.target.innerHTML === '=' && firstValue) {
         calculateEquals();
         deselectOperator();
+        operatorClicked = false;
     };
 };
 
@@ -94,7 +102,7 @@ function calculateChain(calculationType) {
         displayValue = operate(selectedOperator, firstValue, secondValue);
         updateDisplay();
         firstValue = Number(displayValue);
-        displayValue = false;
+        displayValue = 0;
         selectedOperator = calculationType;
     } else {
         selectedOperator = calculationType;
@@ -107,7 +115,7 @@ function calculateEquals() {
     displayValue = operate(selectedOperator, firstValue, secondValue);
     updateDisplay();
     firstValue = Number(displayValue);
-    displayValue = false;
+    displayValue = 0;
 };
 
 function deselectOperator() {
