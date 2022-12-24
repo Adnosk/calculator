@@ -15,7 +15,7 @@ function divide(a, b) {
 };
 
 function operate(operator, a, b) {
-    return operator(a, b);
+    return Number(roundToTwo(operator(a, b)));
 }
 
 let displayValue = 0;
@@ -70,65 +70,15 @@ function selectOperator(e) {
     hasDecimalPoint = false;
     e.target.classList.add('active');
     if (e.target.innerHTML === '+') {
-        if (firstValue) {
-            secondValue = Number(displayValue);
-            displayValue = operate(selectedOperator, firstValue, secondValue);
-            updateDisplay();
-            firstValue = Number(displayValue);
-            displayValue = 0;
-            selectedOperator = add;
-        } else {
-            selectedOperator = add;
-            changeToSecondValue();
-        };
+        calculateChain(add);
     } else if (e.target.innerHTML === '−') {
-
-
-        
-
-        if (firstValue) {
-            secondValue = Number(displayValue);
-            displayValue = operate(selectedOperator, firstValue, secondValue);
-            updateDisplay();
-            firstValue = Number(displayValue);
-            displayValue = false;
-            selectedOperator = subtract;
-        } else {
-            selectedOperator = subtract;
-            changeToSecondValue();
-        };
-
-
+        calculateChain(subtract);
     } else if (e.target.innerHTML === 'x') {
-        if (firstValue) {
-            secondValue = Number(displayValue);
-            displayValue = operate(selectedOperator, firstValue, secondValue);
-            updateDisplay();
-            firstValue = Number(displayValue);
-            displayValue = false;
-            selectedOperator = multiply;
-        } else {
-            selectedOperator = multiply;
-            changeToSecondValue();
-        };
+        calculateChain(multiply);
     } else if (e.target.innerHTML === '/') {
-        if (firstValue) {
-            secondValue = Number(displayValue);
-            displayValue = operate(selectedOperator, firstValue, secondValue);
-            updateDisplay();
-            firstValue = Number(displayValue);
-            displayValue = false;
-            selectedOperator = divide;
-        } else {
-            selectedOperator = divide;
-            changeToSecondValue();
-        };
+        calculateChain(divide);
     } else if (e.target.innerHTML === '=' && firstValue) {
-        secondValue = Number(displayValue);
-            displayValue = operate(selectedOperator, firstValue, secondValue);
-        updateDisplay();
-        firstValue = Number(displayValue);
-        displayValue = false;
+        calculateEquals();
         deselectOperator();
     };
 };
@@ -136,6 +86,28 @@ function selectOperator(e) {
 function changeToSecondValue() {
     firstValue = Number(displayValue);
     displayValue = 0;
+};
+
+function calculateChain(calculationType) {
+    if (firstValue) {
+        secondValue = Number(displayValue);
+        displayValue = operate(selectedOperator, firstValue, secondValue);
+        updateDisplay();
+        firstValue = Number(displayValue);
+        displayValue = false;
+        selectedOperator = calculationType;
+    } else {
+        selectedOperator = calculationType;
+        changeToSecondValue();
+    };
+};
+
+function calculateEquals() {
+    secondValue = Number(displayValue);
+    displayValue = operate(selectedOperator, firstValue, secondValue);
+    updateDisplay();
+    firstValue = Number(displayValue);
+    displayValue = false;
 };
 
 function deselectOperator() {
@@ -149,3 +121,7 @@ const operators = document.querySelectorAll('.operator');
 operators.forEach(operator => {
     operator.addEventListener('click', selectOperator);
 });
+
+function roundToTwo(num) {
+    return +(Math.round(num + "e+5") + "e-5");
+}
