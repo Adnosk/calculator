@@ -108,11 +108,7 @@ function changeToSecondValue() {
 
 function calculateChain(calculationType) {
     if (firstValue) {
-        secondValue = Number(displayValue);
-        displayValue = operate(selectedOperator, firstValue, secondValue);
-        updateDisplay();
-        firstValue = Number(displayValue);
-        displayValue = 0;
+        calculateEquals();
         selectedOperator = calculationType;
     } else {
         selectedOperator = calculationType;
