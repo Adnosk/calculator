@@ -1,3 +1,31 @@
+let displayValue = 0;
+let firstValue = false;
+let secondValue = false;
+let selectedOperator = false;
+let hasDecimalPoint = false;
+let operatorClicked = false;
+
+const display = document.querySelector('#number');
+const buttons = document.querySelectorAll('.nums');
+const clear = document.querySelector('#clear');
+const operators = document.querySelectorAll('.operator');
+
+buttons.forEach(pressingNums);
+
+operators.forEach(operator => {
+    operator.addEventListener('click', selectOperator);
+});
+
+// AC button logic to clear the stored value
+clear.addEventListener('click', clear => {
+    displayValue = 0;
+    firstValue = false;
+    secondValue = false;
+    hasDecimalPoint = false;
+    updateDisplay();
+    deselectOperator();
+});
+
 function add(a, b) {
     return a + b;
 };
@@ -15,27 +43,20 @@ function divide(a, b) {
 };
 
 function operate(operator, a, b) {
-    return Number(roundToTwo(operator(a, b)));
-}
-
-let displayValue = 0;
-let firstValue = false;
-let secondValue = false;
-let selectedOperator = false;
-let hasDecimalPoint = false;
-let operatorClicked = false;
-const display = document.querySelector('#number');
+    const result = Number(roundToTwo(operator(a, b)));
+    if (isNaN(result)) {
+        return 'Ooops stop it!';
+    } else {
+        return result;
+    }
+};
 
 // display the stored value on the display
 function updateDisplay() {
     display.innerHTML = displayValue;
 };
 
-
-
 // pressing buttons and displaying the numbers on the display, checks for decimal
-const buttons = document.querySelectorAll('.nums');
-buttons.forEach(pressingNums);
 
 function pressingNums(button) {
     button.addEventListener('click', () => {
@@ -54,18 +75,7 @@ function pressingNums(button) {
         }
         updateDisplay();
     });
-}
-
-// AC button logic to clear the stored value
-const clear = document.querySelector('#clear');
-clear.addEventListener('click', clear => {
-    displayValue = 0;
-    firstValue = false;
-    secondValue = false;
-    hasDecimalPoint = false;
-    updateDisplay();
-    deselectOperator();
-});
+};
 
 function selectOperator(e) {
     if (operatorClicked && e.target.innerHTML !== '=') {
@@ -124,12 +134,6 @@ function deselectOperator() {
     });
 };
 
-const operators = document.querySelectorAll('.operator');
-
-operators.forEach(operator => {
-    operator.addEventListener('click', selectOperator);
-});
-
 function roundToTwo(num) {
     return +(Math.round(num + "e+5") + "e-5");
-}
+};
